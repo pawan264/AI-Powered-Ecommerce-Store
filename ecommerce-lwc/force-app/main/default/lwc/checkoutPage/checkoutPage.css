@@ -1,0 +1,136 @@
+.checkout-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #16325c;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.address-field {
+    grid-column: 1 / 3;
+}
+
+.button-section {
+    margin-top: 20px;
+    text-align:center;
+}
+
+.button-section lightning-button {
+    width: 100%;
+}
+
+.order-btn {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .address-field {
+        grid-column: auto;
+    }
+
+    .order-btn {
+        width: 100%;
+    }
+}
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.checkout-form {
+    flex: 2;
+}
+
+.order-summary {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+
+    .checkout-layout {
+        flex-direction: column;
+    }
+
+    .order-summary {
+        width: 100%;
+    }
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.total-row {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.section-title{
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:20px;
+    color:#16325c;
+}
+
+.section-title{
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:20px;
+    color:#16325c;
+}
+
+.order-btn {
+    width: 100%;
+}
+
+.checkout-nav {
+    margin-bottom: 20px;
+}
+
+.checkout-nav a {
+    color: #0176d3;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.checkout-nav a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,188 @@
+<template>
+  <div class="product-listing-page" id="top">
+    <header class="topbar slds-p-around_medium">
+      <div class="brand-wrap">
+        <div class="brand-mark">A</div>
+        <div>
+          <p class="brand-name">AstraCart</p>
+          <p class="brand-subtitle">AI Commerce Studio</p>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#top">🏠 Home</a>
+        <a href="#products">📦 Products</a>
+        <a href="#cart">🛒 Cart ({cartCount})</a>
+        <a href="#support">📞 Support</a>
+      </nav>
+    </header>
+
+    <main class="content-shell">
+      <template if:true={showProductDetail}>
+<c-product-detail
+product-id={selectedProductId}
+onbacktoproducts={handleBackToProducts}>
+</c-product-detail>
+</template>
+<template if:false={showProductDetail}>
+      <section class="hero-panel slds-m-bottom_large">
+        <div class="search-panel slds-grid slds-grid_align-spread slds-wrap">
+          <div class="search-intro slds-p-around_medium">
+            <p class="eyebrow">Search Products</p>
+            <h1>Find the best deals for your next purchase.</h1>
+            <p>
+              Quickly discover top-rated mobiles, laptops, wearables and
+              everyday essentials with smart filters.
+            </p>
+          </div>
+
+          <div
+            class="search-controls slds-p-around_medium slds-size_1-of-1 slds-medium-size_7-of-12"
+          >
+            <div
+              class="slds-grid slds-wrap slds-grid_vertical-align-center slds-grid_pull-padded"
+            >
+              <div
+                class="slds-col slds-size_1-of-1 slds-p-horizontal_small search-field"
+              >
+                <lightning-input
+                  type="search"
+                  label="Search by product name"
+                  placeholder="Search mobiles, laptops, shoes..."
+                  value={searchTerm}
+                  onchange={handleSearchInput}
+                ></lightning-input>
+              </div>
+              <div
+                class="slds-col slds-size_1-of-1 slds-p-horizontal_small sort-field"
+              >
+                <lightning-combobox
+                  name="sort"
+                  label="Sort By"
+                  value={sortOption}
+                  options={sortOptions}
+                  onchange={handleSortChange}
+                ></lightning-combobox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="filters-bar slds-m-bottom_large">
+        <div class="filter-block">
+          <p class="filter-label">Category Filter</p>
+          <div class="category-list">
+            <template for:each={categoryOptions} for:item="item">
+              <button
+                key={item.category}
+                class={item.className}
+                data-category={item.category}
+                title={item.category}
+                onclick={handleCategoryClick}
+              >
+                {item.category}
+              </button>
+            </template>
+          </div>
+        </div>
+        <div class="results-summary">
+          <p>{filteredProductCount} products found</p>
+        </div>
+      </section>
+
+      <section id="products" class="products-grid">
+        <template if:true={pagedProducts.length}>
+          <template for:each={pagedProducts} for:item="product">
+            <article key={product.id} class="product-card slds-card">
+              <div class="product-image">
+                <img src={product.imageUrl} alt={product.name} />
+              </div>
+              <div class="product-details">
+                <div class="product-top-row">
+                  <span class="product-category">{product.category}</span>
+                  <span class="product-rating">★ {product.rating}</span>
+                </div>
+                <h2>{product.name}</h2>
+                <p class="stock-status {product.stockClass}">
+                  {product.stockStatus}
+                </p>
+                <div class="product-price-row">
+                  <strong>${product.price}</strong>
+                  <span class="product-badge">{product.tag}</span>
+                </div>
+                <div class="product-actions slds-grid slds-grid_align-spread">
+                  <button
+                    class="slds-button slds-button_neutral"
+                    data-id={product.id}
+                    onclick={handleViewDetails}
+                  >
+                    View Details
+                  </button>
+                  <button
+                    class="slds-button slds-button_brand"
+                    data-id={product.id}
+                    onclick={handleAddToCart}
+                  >
+                    Add To Cart
+                  </button>
+                </div>
+              </div>
+            </article>
+          </template>
+        </template>
+        <template if:false={pagedProducts.length}>
+          <div class="no-results">
+            <p>
+              No products match the current search and filter. Try a different
+              keyword or category.
+            </p>
+          </div>
+        </template>
+      </section>
+
+      <section class="pagination-bar slds-m-top_large">
+        <button
+          class="slds-button slds-button_neutral"
+          onclick={goPrevious}
+          disabled={isFirstPage}
+        >
+          Previous
+        </button>
+        <div class="pagination-pages">
+          <template for:each={pageNumbers} for:item="page">
+            <button
+              key={page.page}
+              class={page.className}
+              data-page={page.page}
+              onclick={goToPage}
+            >
+              {page.page}
+            </button>
+          </template>
+        </div>
+        <button
+          class="slds-button slds-button_neutral"
+          onclick={goNext}
+          disabled={isLastPage}
+        >
+          Next
+        </button>
+      </section>
+      </template>
+    </main>
+
+    
+
+
+
+    <footer class="footer slds-p-around_medium">
+      <p>© 2026 AstraCart. Intelligent shopping for modern lifestyles.</p>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Support</a>
+        <a href="#">Contact</a>
+      </div>
+    </footer>
+  </div>
+</template>

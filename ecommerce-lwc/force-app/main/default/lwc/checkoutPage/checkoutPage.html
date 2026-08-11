@@ -1,0 +1,118 @@
+<template>
+
+    <div class="checkout-container">
+        <div class="checkout-nav">
+
+    <a onclick={navigateToProducts}>
+        📦 Products
+    </a>
+
+</div>
+
+        <h1 class="checkout-title">
+            Checkout
+        </h1>
+
+        <h3 class="section-title">
+Delivery Information
+</h3>
+
+        <div class="checkout-layout">
+
+            <div class="checkout-form">
+
+                <div class="form-grid">
+
+                    <lightning-input
+                        label="Customer Name"
+                        name="customerName"
+                        onchange={handleChange}>
+                    </lightning-input>
+
+                    <lightning-input
+                        label="Email"
+                        type="email"
+                        name="email"
+                        onchange={handleChange}>
+                    </lightning-input>
+
+                    <lightning-input
+                        label="Phone Number"
+                        name="phone"
+                        onchange={handleChange}>
+                    </lightning-input>
+
+                    <lightning-input
+                        label="City"
+                        name="city"
+                        onchange={handleChange}>
+                    </lightning-input>
+
+                    <div class="address-field">
+
+                        <lightning-textarea
+                            label="Delivery Address"
+                            name="address"
+                            onchange={handleChange}>
+                        </lightning-textarea>
+
+                    </div>
+
+                                <div class="button-section">
+
+    <lightning-button
+        variant="brand"
+        label="Place Order"
+        class="order-btn"
+        onclick={placeOrder}>
+    </lightning-button>
+
+</div>
+
+                </div>
+
+                
+
+            </div>
+
+
+
+            <div class="order-summary">
+
+                <h2>Order Summary</h2>
+
+<div class="summary-row">
+    <span>Items</span>
+    <span>{cartItems.length}</span>
+</div>
+
+<div class="summary-row">
+    <span>Subtotal</span>
+    <span>₹ {cartTotal}</span>
+</div>
+
+<div class="summary-row">
+    <span>Shipping</span>
+    <span>FREE</span>
+</div>
+
+<hr>
+
+<div class="summary-row total-row">
+    <span>Total</span>
+    <span>₹ {cartTotal}</span>
+</div>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+   
+
+
+
+
+</template>

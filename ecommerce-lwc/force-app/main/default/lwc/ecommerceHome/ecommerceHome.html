@@ -1,0 +1,269 @@
+<template>
+    <div class="home-page" id="top">
+        <header class="topbar slds-p-around_large">
+            <div class="brand-wrap">
+                <div class="brand-mark">A</div>
+                <div>
+                    <p class="brand-name">AstraCart</p>
+                    <p class="brand-subtitle">AI Commerce Studio</p>
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#top">🏠 Home</a>
+                <a onclick={navigateToProducts}>
+    📦 Products
+</a>
+                <a href="#orders">📋 Orders</a>
+                <a href="#recommended">🤖 AI Assistant</a>
+               <a onclick={navigateToCart}>
+    🛒 Cart ({cartCount})
+</a>
+            </nav>
+
+        </header>
+
+        <main>
+            <section class="hero slds-m-bottom_large">
+                <div class="hero-copy">
+                    <p class="eyebrow">AI-Powered Smart E-Commerce Store</p>
+                    <h1>Discover products that feel handcrafted for you.</h1>
+                    <p class="hero-text">
+                        From premium tech to everyday essentials, AstraCart blends intelligent recommendations,
+                        real-time trends, and effortless shopping into one modern experience.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="primary-btn">Shop Best Sellers</button>
+                        <button class="secondary-btn">Explore AI Picks</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div>
+                            <strong>24/7</strong>
+                            <span>AI Support</span>
+                        </div>
+                        <div>
+                            <strong>98%</strong>
+                            <span>Delivery Precision</span>
+                        </div>
+                        <div>
+                            <strong>4.9★</strong>
+                            <span>Customer Love</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-panel">
+                    <div class="hero-panel-card">
+                        <p class="label">Live Insight</p>
+                        <h3>Today's smart bundle</h3>
+                        <ul>
+                            <li>Ultra-fast laptop + premium earbuds</li>
+                            <li>Free express shipping over $75</li>
+                            <li>Personalized savings unlocked</li>
+                        </ul>
+                    </div>
+                    <div class="hero-panel-badge">
+                        <span>AI</span>
+                        <p>Recommended for you</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="search-section slds-m-bottom_large">
+                <div class="search-card">
+                    <div class="search-copy">
+                        <p class="eyebrow">Smart Search</p>
+                        <h2>Find the perfect product in seconds</h2>
+                    </div>
+                    <div class="search-box">
+                        <lightning-input
+                            type="search"
+                            label="Search products"
+                            placeholder="Search laptops, headphones, smart home..."
+                            value={searchTerm}
+                            onchange={handleSearchInput}
+                        ></lightning-input>
+                        <button class="primary-btn search-btn" onclick={handleSearchSubmit}>Search</button>
+                    </div>
+                    <p class="search-hint">Popular: <span>Smart Watch</span> <span>Noise Cancelling</span> <span>Portable Speaker</span></p>
+                </div>
+            </section>
+
+            <section class="categories-section slds-m-bottom_large">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Shop by Category</p>
+                        <h2>Browse top collections</h2>
+                    </div>
+                    <a href="#featured">See all</a>
+                </div>
+
+                <div class="category-grid">
+                    <template for:each={categories} for:item="category">
+                        <div key={category.name} class="category-card">
+                            <div class="category-icon">{category.icon}</div>
+                            <h3>{category.name}</h3>
+                            <p>{category.description}</p>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <section id="featured" class="products-section slds-m-bottom_large">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Featured Products</p>
+                        <h2>Handpicked favorites</h2>
+                    </div>
+                    <a href="#featured">View more</a>
+                </div>
+
+                <div class="product-grid">
+                    <template for:each={filteredFeaturedProducts} for:item="product">
+                        <article key={product.name} class="product-card">
+                            <div class="product-media">{product.icon}</div>
+                            <div class="product-body">
+                                <div class="product-top">
+                                    <span class="product-badge">{product.badge}</span>
+                                    <span class="product-rating">★ {product.rating}</span>
+                                </div>
+                                <h3>{product.name}</h3>
+                                <p>{product.description}</p>
+                                <div class="product-footer">
+                                    <strong>${product.price}</strong>
+                                    <button>Add to Cart</button>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </section>
+
+            <section id="recommended" class="products-section slds-m-bottom_large">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">AI Recommended</p>
+                        <h2>Products matched to your style</h2>
+                    </div>
+                    <a href="#recommended">Personalize</a>
+                </div>
+
+                <div class="product-grid">
+                    <template for:each={filteredRecommendedProducts} for:item="product">
+                        <article key={product.name} class="product-card featured-card">
+                            <div class="product-media">{product.icon}</div>
+                            <div class="product-body">
+                                <div class="product-top">
+                                    <span class="product-badge">Smart Match</span>
+                                    <span class="product-rating">★ {product.rating}</span>
+                                </div>
+                                <h3>{product.name}</h3>
+                                <p>{product.description}</p>
+                                <div class="product-footer">
+                                    <strong>${product.price}</strong>
+                                    <button>View Match</button>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </section>
+
+            <section id="trending" class="products-section slds-m-bottom_large">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Trending Now</p>
+                        <h2>What's heating up this week</h2>
+                    </div>
+                    <a href="#trending">See insights</a>
+                </div>
+ 
+                <div class="product-grid">
+                    <template for:each={filteredTrendingProducts} for:item="product">
+                        <article key={product.name} class="product-card">
+                            <div class="product-media">{product.icon}</div>
+                            <div class="product-body">
+                                <div class="product-top">
+                                    <span class="product-badge">Hot</span>
+                                    <span class="product-rating">★ {product.rating}</span>
+                                </div>
+                                <h3>{product.name}</h3>
+                                <p>{product.description}</p>
+                                <div class="product-footer">
+                                    <strong>${product.price}</strong>
+                                    <button>Buy Now</button>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </section>
+ 
+            <section id="orders" class="orders-section slds-m-bottom_large">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Orders</p>
+                        <h2>Your latest order activity</h2>
+                    </div>
+                    <a href="#orders">View all</a>
+                </div>
+                <div class="orders-card">
+                    <p>No orders yet. Start exploring products and add them to your cart.</p>
+                </div>
+            </section>
+ 
+            <section id="cart" class="cart-section slds-m-bottom_large">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Cart</p>
+                        <h2>Ready for checkout</h2>
+                    </div>
+                </div>
+                <div class="orders-card">
+                    <p>Your cart is empty. Add items to see them here.</p>
+                </div>
+            </section>
+ 
+            <section id="why-us" class="benefits-section slds-m-bottom_large">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Why Choose Us</p>
+                        <h2>Built for confidence and convenience</h2>
+                    </div>
+                </div>
+
+                <div class="benefit-grid">
+                    <template for:each={benefits} for:item="benefit">
+                        <div key={benefit.title} class="benefit-card">
+                            <div class="benefit-icon">{benefit.icon}</div>
+                            <h3>{benefit.title}</h3>
+                            <p>{benefit.description}</p>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <section class="newsletter-section">
+                <div class="newsletter-card">
+                    <div>
+                        <p class="eyebrow">Stay in the loop</p>
+                        <h2>Get exclusive deals and AI picks first.</h2>
+                    </div>
+                    <div class="newsletter-actions">
+                        <input type="email" placeholder="Enter your email" />
+                        <button class="primary-btn">Subscribe</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 AstraCart. Intelligent shopping for modern lifestyles.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Support</a>
+                <a href="#">Contact</a>
+            </div>
+        </footer>
+    </div>
+</template>
