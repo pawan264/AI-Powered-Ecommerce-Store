@@ -1,0 +1,39 @@
+<template>
+
+    <div class="orders-container">
+
+        <h1>My Orders</h1>
+
+        <template for:each={orders} for:item="order">
+
+            <div key={order.Id} class="order-card">
+
+                <h2>{order.Name}</h2>
+
+                <p>
+                    Customer:
+                    {order.Customer_Name__c}
+                </p>
+
+                <p>
+                    Amount:
+                    ₹ {order.Total_Amount__c}
+                </p>
+
+                <p>
+                    Status:
+                    {order.Status__c}
+                </p>
+
+                <p>
+                    Date:
+                    {order.CreatedDate}
+                </p>
+
+            </div>
+
+        </template>
+
+    </div>
+
+</template>
