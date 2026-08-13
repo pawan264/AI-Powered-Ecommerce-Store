@@ -30,10 +30,20 @@
                     {order.CreatedDate}
                 </p>
 
+                <lightning-button
+
+label="View Details"
+variant="brand-outline"
+data-id={order.Id}
+onclick={handleViewDetails}>
+</lightning-button>
+
             </div>
 
         </template>
 
-    </div>
+       
 
+    </div>
+     
 </template>
