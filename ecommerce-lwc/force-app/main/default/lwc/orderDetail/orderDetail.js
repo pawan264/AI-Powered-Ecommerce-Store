@@ -28,4 +28,41 @@ export default class OrderDetail extends LightningElement {
             console.error(error);
         }
     }
+
+    get statusClass() {
+
+    if (!this.order) {
+        return '';
+    }
+
+    switch (this.order.Status__c) {
+
+        case 'Delivered':
+            return 'status delivered';
+
+        case 'Processing':
+            return 'status processing';
+
+        case 'Pending':
+            return 'status pending';
+
+        case 'Cancelled':
+            return 'status cancelled';
+
+        default:
+            return 'status';
+    }
+}
+
+get formattedDate() {
+
+    if (!this.order?.CreatedDate) {
+        return '';
+    }
+
+    return new Date(
+        this.order.CreatedDate
+    ).toLocaleDateString('en-IN');
+}
+
 }

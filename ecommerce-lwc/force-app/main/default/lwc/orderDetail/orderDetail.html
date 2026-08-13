@@ -5,43 +5,104 @@
         <div class="order-detail-container">
 
             <h1>Order Details</h1>
+            <lightning-button
+    label="Back To My Orders"
+    icon-name="utility:back"
+    onclick={goBack}>
+</lightning-button>
 
-            <p>
-                <strong>Order Name:</strong>
-                {order.Name}
-            </p>
+          <div class="section">
 
-            <p>
-                <strong>Customer Name:</strong>
-                {order.Customer_Name__c}
-            </p>
+    <h2 class="section-title">
+        Order Information
+    </h2>
 
-            <p>
-                <strong>Email:</strong>
-                {order.Customer_Email__c}
-            </p>
+    <p>
+        <strong>Order Name:</strong>
+        {order.Name}
+    </p>
 
-            <p>
-                <strong>Phone:</strong>
-                {order.Customer_Phone__c}
-            </p>
+    <p>
+        <strong>Status:</strong>
 
-            <p>
-                <strong>Address:</strong>
-                {order.Delivery_Address__c}
-            </p>
+        <span class={statusClass}>
+            {order.Status__c}
+        </span>
 
-            <p>
-                <strong>Total Amount:</strong>
-                ₹ {order.Total_Amount__c}
-            </p>
+    </p>
 
-            <p>
-                <strong>Status:</strong>
-                {order.Status__c}
-            </p>
+    <p>
+        <strong>Total Amount:</strong>
+        ₹ {order.Total_Amount__c}
+    </p>
 
+    <p>
+    <strong>Order Date:</strong>
+    {formattedDate}
+</p>
+
+</div>
+
+        <div class="section">
+
+    <h2 class="section-title">
+        Customer Information
+    </h2>
+
+    <p>
+        <strong>Customer Name:</strong>
+        {order.Customer_Name__c}
+    </p>
+
+    <p>
+        <strong>Email:</strong>
+        {order.Customer_Email__c}
+    </p>
+
+    <p>
+        <strong>Phone:</strong>
+        {order.Customer_Phone__c}
+    </p>
+
+</div>
+
+<div class="section">
+
+    <h2 class="section-title">
+        Delivery Address
+    </h2>
+
+    <p>
+        {order.Delivery_Address__c}
+    </p>
+
+</div>
+
+<div class="section">
+
+    <h2 class="section-title">
+        Payment Summary
+    </h2>
+
+    <p>
+        <strong>Subtotal:</strong>
+        ₹ {order.Total_Amount__c}
+    </p>
+
+    <p>
+        <strong>Shipping:</strong>
+        FREE
+    </p>
+
+    <p>
+        <strong>Total:</strong>
+        ₹ {order.Total_Amount__c}
+    </p>
+
+         
         </div>
+    </div>
+
 
     </template>
 
