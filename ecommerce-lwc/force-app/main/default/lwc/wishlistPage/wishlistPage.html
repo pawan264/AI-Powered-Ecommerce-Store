@@ -1,0 +1,50 @@
+<template>
+
+    <div class="wishlist-container">
+
+        <h1>❤️ My Wishlist</h1>
+        <p>Total Records: {wishlistItems.length}</p>
+
+        <template for:each={wishlistItems}
+                  for:item="item">
+
+            <div
+                key={item.Id}
+                class="wishlist-card">
+
+                <h2>
+                    {item.Product_Name__c}
+                </h2>
+
+                <p>
+                    ₹ {item.Price__c}
+                </p>
+
+                <lightning-button
+    label="View Product"
+    variant="brand"
+    data-id={item.Product_Id__c}
+    onclick={handleViewProduct}>
+</lightning-button>
+
+<lightning-button
+    label="Add To Cart"
+    variant="success"
+    data-id={item.Id}
+    onclick={handleAddToCart}>
+</lightning-button>
+
+                <lightning-button
+    label="Remove"
+    variant="destructive"
+    data-id={item.Id}
+    onclick={handleRemove}>
+</lightning-button>
+
+            </div>
+
+        </template>
+
+    </div>
+
+</template>

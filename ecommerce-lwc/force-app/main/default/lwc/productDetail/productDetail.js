@@ -3,6 +3,8 @@ import { CurrentPageReference } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getProductById from '@salesforce/apex/ProductDetailController.getProductById';
 import getRelatedProducts from '@salesforce/apex/ProductDetailController.getRelatedProducts';
+import addToWishlist
+from '@salesforce/apex/WishlistController.addToWishlist';
 
 
 const DEFAULT_RATING = 4.8;
@@ -243,11 +245,28 @@ export default class ProductDetail extends LightningElement {
   }
 
   handleToggleWishlist() {
-    this.wishlistActive = !this.wishlistActive;
-    const message = this.wishlistActive
-      ? 'Added to wishlist.'
-      : 'Removed from wishlist.';
-    this.showToast('Wishlist Updated', message, 'success');
+    addToWishlist({
+      productName: this.product.Name,
+      productId: this.product.Id,
+      price: this.product.Price__c,
+      imageUrl: this.product.Product_Image__c
+    })
+      .then(() => {
+        this.wishlistActive = true;
+        this.showToast(
+          'Success',
+          'Added To Wishlist',
+          'success'
+        );
+      })
+      .catch(error => {
+        console.error(error);
+        this.showToast(
+          'Error',
+          'Unable To Add Wishlist',
+          'error'
+        );
+      });
   }
 
   handleAddToCart() {
